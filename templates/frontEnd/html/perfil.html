@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Utilizador</title>
+    <link rel="stylesheet" href="/templates/frontEnd/styles/perfil.css">
+</head>
+<style>
+    .centrar{
+    text-align: center;
+}
+
+h1{
+    margin-top: 100px;
+    font-size: 45px;
+    font-family: "Arial", sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    font-size: 10%;
+    margin-left: 19%;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #000000;
+    border-radius: 5px;
+}
+.same-size-button {
+    width: 200px; /* Adjust the width as needed */
+    height: 30px;
+    font-size: 13px;
+}
+
+p{
+    margin-top: 9%;
+}
+
+input{
+    width: 270px;
+}
+
+.inputdesc{
+    height: 50px;
+}
+
+.barras{
+    margin-left: 2%;
+}
+
+.save{
+    margin-left: 52.5%;
+}
+body{
+    background-color: #BDBDBD;
+}
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+  }
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+nav ul li {
+    float: left;
+  }
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 19px;
+    text-decoration: none;
+  }
+
+nav ul li a:hover {
+    background-color: #111;
+  }
+
+
+</style>
+<body>
+    <nav>
+        <ul>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projeto.html">Projects</a></li>
+          
+        
+        </ul>
+    </nav>
+    <div class="centrar">
+        <h1>Perfil</h1>
+    </div>
+    <div class="container">
+        <ul> 
+            <br>
+                <button class="same-size-button"><a href="meusprojetos.html"> Meus Projetos</a></button>
+            <br>
+                <button class="same-size-button"><a href="Equipas.html"> Equipas de Trabalho</a></button>
+            <br>
+                <button class="same-size-button"><a href="tarefas.html"> Tarefas e Cronogramas</a></button>
+           
+        </ul>
+            <img src="https://cdn.discordapp.com/attachments/1226910659472527430/1250963053659295764/pngtree-user-profile-avatar-png-image_10211467-Photoroom.png-Photoroom.png?ex=666cd9a1&is=666b8821&hm=a436441d6ab5468243776332aff25d23193ddaaa9c8df37ede5536d589efe4ce&" alt="Imagem" width="250" height="250">        
+            <div class="barras">   
+                    <input type="text" placeholder="Email">
+                <p>
+                    <input type="text" placeholder="Data de Nascimento">
+                </p>
+                <p>
+                    <input type="text" placeholder="Profissão">
+                </p>
+                <p>
+                <input type="text" placeholder="Contacto">
+                </p>
+                <p>
+                <input class="inputdesc" type="text" placeholder="Descrição">
+                </p>
+            </div> 
+    </div>
+    <button class="save"><a href="projeto.html">Save</a></button>
+
+</body>
+</html>

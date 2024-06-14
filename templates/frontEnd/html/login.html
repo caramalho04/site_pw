@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/templates/frontEnd/styles/create.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+</head>
+<style>
+
+body {
+  background-color: #BDBDBD;
+}
+
+
+.container {
+  text-align: center;
+}
+
+.card {
+  display: inline-block;
+  margin: 40px auto;
+  background-color: #BDBDBD;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.btn-primary {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #23527c;
+  border-color: #1d4e73;
+}
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+  }
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+nav ul li {
+    float: left;
+  }
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 19px;
+    text-decoration: none;
+  }
+
+nav ul li a:hover {
+    background-color: #111;
+  }
+
+#login-link{
+  margin-left: 2075%;
+}
+
+
+</style>
+<body>
+    <nav>
+        <ul>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projeto.html">Projects</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Criar Utilizador</h2>
+        <div class="card" style="width: 400px">
+          <img class="card-img-top" src="https://cdn.discordapp.com/attachments/1226910659472527430/1250963054280310794/logo.png?ex=666cd9a1&is=666b8821&hm=c532ae69fbe448d1cf4565da0a3e287b27656101c853086ac69ea64e1cd9cd55&" alt="Piloto" style="width: 100%" />
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" placeholder="Escreve o Nome" name="nome" required/>
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required/>
+              </div>
+              <div class="form-group">
+                <label for="pswd">Password:</label>
+                <input type="password" class="form-control mb-3" id="pswd" placeholder="Escreve a password" name="pswd" required/>
+              </div>
+              <a href="perfil.html" class="btn btn-secondary">login</a>
+              <a href="forgot_password.html" class="btn btn-secondary">Forgot Password</a>
+              <a href="create_account.html" class="btn btn-secondary">Criar nova Conta</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
