@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Utilizador</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
@@ -61,7 +61,6 @@
             font-size: 30px;
             margin-top: 10%;
             width: 900px;
-
         }
 
         .container .imagem {
@@ -115,84 +114,68 @@
             <li><a href="about.html">About</a></li>
             <li><a href="projeto.html">Projects</a></li>
             <li><a href="login.html" id="login-link">Login</a></li>
-
         </ul>
     </nav>
     <div class="container">
-        <h2>Criar Utilizador</h2>
+        <h2>Login</h2>
         <div class="card" style="width: 400px">
-            <img class="card-img-top" src="https://www.designi.com.br/images/preview/11153874.jpg" alt="Piloto"
-                style="width: 100%" />
+            <div class="d-flex justify-content-center">
+                <img class="card-img-top" src="https://cdn.icon-icons.com/icons2/1097/PNG/512/1485477097-avatar_78580.png" alt="logo" style="width: 50%;" />
+            </div>
             <div class="card-body">
                 <form method="post" action="">
                     <div class="form-group">
-                      <label for="email">Email:</label>
-                      <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required />
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email"
+                            required />
                     </div>
                     <div class="form-group">
-                      <label for="pswd">Password:</label>
-                      <input type="password" class="form-control" id="pswd" placeholder="Escreve a confirmação da password" name="pswd" required />
+                        <label for="pswd">Password:</label>
+                        <input type="password" class="form-control" id="pswd"
+                            placeholder="Escreve a confirmação da password" name="pswd" required />
                     </div>
                     <button type="button" class="btn btn-primary" onclick="validaLogin()">Login</button>
-                  </form>
+                    <a class="btn btn-primary" href="create_account.html">Criar Conta</a>
+                </form>
             </div>
         </div>
     </div>
 
     <script>
-        async function validaPassword() {
-            var password1 = document.getElementById("pswd").value;
-            var password2 = document.getElementById("coPwd").value;
-
-            // Validar através de Expressão Regular
-            var passwordcheck1 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-
-            if (!passwordcheck1.test(password1)) {
-                alert("Password inválida. Deve conter entre 8 a 15 caracteres, pelo menos uma letra minúscula, uma letra maiúscula, um número e um caractere especial.");
-                return false;
-            }
-
-            if (password1 !== password2) {
-                alert("A senha e a confirmação da senha não coincidem.");
-                return false;
-            }
-
-            await cadastrarUsuario();
-        }
-
-        async function cadastrarUsuario() {
-            var dados = {
-                email: document.getElementById("email").value,
-                name: document.getElementById("nome").value,
-                password: document.getElementById("pswd").value,
-                isAdmin: false,
-            };
+        async function validaLogin() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pswd").value;
 
             try {
-                const response = await fetch("http://localhost:4242/api/pgs/auth/signup", {
+                const response = await fetch("http://localhost:4242/api/pgs/auth/login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(dados),
+                    body: JSON.stringify({ email: email, password: password }),
                 });
 
                 if (!response.ok) {
-                    throw new Error("Erro ao cadastrar novo usuário - " + response.status + " " + response.statusText);
+                    throw new Error("Erro ao fazer login - " + response.status + " " + response.statusText);
                 }
 
                 const data = await response.json();
-                alert("Usuário cadastrado com sucesso!");
-                console.log(data); // Aqui você pode tratar a resposta do servidor conforme necessário
+
+                if (data.success) {
+                    alert("Login bem-sucedido!");
+                    window.location.href = "perfil.html";
+                } else {
+                    alert("Credenciais inválidas. Por favor, tente novamente.");
+                }
             } catch (error) {
-                alert("Houve um erro ao cadastrar o usuário: " + error.message);
+                alert("Houve um erro ao fazer login: " + error.message);
             }
         }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
