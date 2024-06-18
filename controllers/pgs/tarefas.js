@@ -1,107 +1,81 @@
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-//Testa a ligação
-exports.testConnection = async (req, res) => {
+// Função para criar uma nova tarefa
+exports.criarTarefa = async (req, res) => {
     try {
-        await prisma.$connect();
-        res.send('Ligação bem-sucedida com o PostgreSQL!');
-      } catch (error) {
-        res.send('Erro ao conectar ao PostgreSQL:', error);
-      } finally {
-        await prisma.$disconnect();
-      }
-}
-//Devolve todos os tarefas
-exports.getAll = async (req, res) => {
-    try {
-        //le toda a tabela
-        const response = await prisma.tarefas.findMany();
-        res.status(200).json(response)
-    } catch (error) {
-        res.status(500).json({ msg: error.message })
-    }
-}
-
-//Devolve um tarefa indicado por um id
-exports.getById = async (req, res) => {
-    //apanha o id enviado
-    const id_tarefa = req.params.id_tarefa*1;
-    try {
-        //procura o tarefa com o id
-        const response = await prisma.tarefas.findUnique({
-            where: {
-                id_tarefa: id_tarefa,
-            },
-        })
-        //devolve o tarefa
-        res.status(200).json(response)
-    } catch (error) {
-        res.status(404).json({ msg: error.message })
-    }
-}
-//criar um tarefa
-exports.create = async (req, res) => {
-    //apanhar os dados enviados
-    const { NomeTarefa, Descricao, DataInicio, DataFim, Estado } = req.body;
-    try {
-        //criar um novo tarefa
-        const tarefa = await prisma.tarefas.create({
+        const { NomeTarefa, DataInicio, DataFim, Estado, Descricao } = req.body;
+        const novaTarefa = await prisma.tarefas.create({
             data: {
-                NomeTarefa: NomeTarefa,
-                Descricao: Descricao,
-                DataInicio: DataInicio,
-                DataFim: DataFim,
-                Estado: Estado
-            },
-        })
-        //devolve o tarefa criado
-        res.status(201).json(tarefa)
+                NomeTarefa,
+                DataInicio,
+                DataFim,
+                Estado,
+                Descricao
+            }
+        });
+        res.status(201).json(novaTarefa);
     } catch (error) {
-        res.status(400).json({ msg: error.message })
+        res.status(400).json({ error: error.message });
     }
-}
-//Atualizar um tarefa
-exports.update = async (req, res) => {
-    const { NomeTarefa, Descricao, DataInicio, DataFim, Estado } = req.body;
+};
 
+// Função para obter uma tarefa pelo ID
+exports.obterTarefaPorId = async (req, res) => {
     try {
-        //procurar o tarefa com id e atualizar os dados
-        const tarefa = await prisma.tarefas.update({
-            where: {
-                id_tarefa: id_tarefa*1,
-            },
-            data: {
-                NomeTarefa: NomeTarefa,
-                Descricao: Descricao,
-                DataInicio: DataInicio,
-                DataFim: DataFim,
-                Estado: Estado
-            },
-        })
-        //devolve o tarefa atualizado
-        res.status(200).json(tarefa)
+        const id = parseInt(req.params.id);
+        const tarefa = await prisma.tarefas.findUnique({
+            where: { id_Tarefa: id },
+        });
+        if (!tarefa) {
+            throw new Error('Tarefa não encontrada');
+        }
+        res.status(200).json(tarefa);
     } catch (error) {
-        res.status(400).json({ msg: error.message })
+        res.status(404).json({ error: error.message });
     }
-}
-//apagar o tarefa com id passado
-exports.delete = async (req, res) => {
-    //le o id do tarefa
-    const id = req.params.id_tarefa;
+};
+
+// Função para atualizar uma tarefa pelo ID
+exports.atualizarTarefa = async (req, res) => {
     try {
-        //delete student
+        const id = parseInt(req.params.id);
+        const { NomeTarefa, DataInicio, DataFim, Estado, Descricao } = req.body;
+        const tarefaAtualizada = await prisma.tarefas.update({
+            where: { id_Tarefa: id },
+            data: {
+                NomeTarefa,
+                DataInicio,
+                DataFim,
+                Estado,
+                Descricao
+            }
+        });
+        res.status(200).json(tarefaAtualizada);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+// Função para apagar uma tarefa pelo ID
+exports.apagarTarefa = async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
         await prisma.tarefas.delete({
-            where: {
-                id_tarefa: id_tarefa*1,
-            },
-        })
-        //just return ok
-        res.status(200).send("ok");
+            where: { id_Tarefa: id },
+        });
+        res.status(204).end();
     } catch (error) {
-        res.status(400).json({ msg: error.message })
+        res.status(400).json({ error: error.message });
     }
-}
+};
 
-
-
+// Função para listar todas as tarefas
+exports.listarTarefas = async (req, res) => {
+    try {
+        const tarefas = await prisma.tarefas.findMany();
+        res.status(200).json(tarefas);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

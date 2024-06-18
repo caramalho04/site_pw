@@ -1,103 +1,99 @@
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-//Testa a ligação
+// Testa a ligação com o PostgreSQL
 exports.testConnection = async (req, res) => {
     try {
         await prisma.$connect();
         res.send('Ligação bem-sucedida com o PostgreSQL!');
-      } catch (error) {
-        res.send('Erro ao conectar ao PostgreSQL:', error);
-      } finally {
+    } catch (error) {
+        res.status(500).send(`Erro ao conectar ao PostgreSQL: ${error}`);
+    } finally {
         await prisma.$disconnect();
-      }
-}
-//Devolve todos os projetos
+    }
+};
+
+// Obtém todos os projetos
 exports.getAll = async (req, res) => {
     try {
-        //le toda a tabela
-        const response = await prisma.projetos.findMany();
-        res.status(200).json(response)
+        const projetos = await prisma.projetos.findMany();
+        res.status(200).json(projetos);
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        res.status(500).json({ message: error.message });
     }
-}
+};
 
-//Devolve um projeto indicado por um id
+// Obtém um projeto pelo ID
 exports.getById = async (req, res) => {
-    //apanha o id enviado
-    const id = req.params.id*1;
-    try {
-        //procura o projeto com o id
-        const response = await prisma.projetos.findUnique({
-            where: {
-                id: id,
-            },
-        })
-        //devolve o projeto
-        res.status(200).json(response)
-    } catch (error) {
-        res.status(404).json({ msg: error.message })
-    }
-}
-//criar um projeto
-exports.create = async (req, res) => {
-    //apanhar os dados enviados
-    const { Marca, Detalhes, Foto } = req.body;
-    try {
-        //criar um novo projeto
-        const projeto = await prisma.projetos.create({
-            data: {
-                Marca: Marca,
-                Detalhes: Detalhes,
-                Foto: Foto
-            },
-        })
-        //devolve o projeto criado
-        res.status(201).json(projeto)
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-//Atualizar um projeto
-exports.update = async (req, res) => {
-    const { id, Marca, Detalhes, Foto } = req.body;
+    const id = req.params.id;
 
     try {
-        //procurar o projeto com id e atualizar os dados
-        const projeto = await prisma.projetos.update({
+        const projeto = await prisma.projetos.findUnique({
             where: {
-                id: id*1,
+                id: Number(id),
+            },
+        });
+        if (!projeto) {
+            res.status(404).json({ message: `Projeto com ID ${id} não encontrado` });
+            return;
+        }
+        res.status(200).json(projeto);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Cria um novo projeto
+exports.create = async (req, res) => {
+    const { Nome, Descricao, Estado } = req.body;
+
+    try {
+        const novoProjeto = await prisma.projetos.create({
+            data: {
+                Nome,
+                Descricao,
+                Estado,
+            },
+        });
+        res.status(201).json(novoProjeto);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// Atualiza um projeto existente
+exports.update = async (req, res) => {
+    const { id, Nome, Descricao, Estado } = req.body;
+
+    try {
+        const projetoAtualizado = await prisma.projetos.update({
+            where: {
+                id: Number(id),
             },
             data: {
-                Marca: Marca,
-                Detalhes: Detalhes,
-                Foto: Foto
+                Nome,
+                Descricao,
+                Estado,
             },
-        })
-        //devolve o projeto atualizado
-        res.status(200).json(projeto)
+        });
+        res.status(200).json(projetoAtualizado);
     } catch (error) {
-        res.status(400).json({ msg: error.message })
+        res.status(400).json({ message: error.message });
     }
-}
-//apagar o projeto com id passado
+};
+
+// Apaga um projeto pelo ID
 exports.delete = async (req, res) => {
-    //le o id do projeto
     const id = req.params.id;
+
     try {
-        //delete student
         await prisma.projetos.delete({
             where: {
-                id: id*1,
+                id: Number(id),
             },
-        })
-        //just return ok
-        res.status(200).send("ok");
+        });
+        res.status(200).json({ message: `Projeto com ID ${id} deletado com sucesso` });
     } catch (error) {
-        res.status(400).json({ msg: error.message })
+        res.status(400).json({ message: error.message });
     }
-}
-
-
-
+};

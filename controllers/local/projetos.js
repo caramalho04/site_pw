@@ -44,13 +44,13 @@ exports.create = async (req, res) => {
 //atualiza o projeto
 exports.update = async (req, res) => {
     //obter o projeto pelas características enviadas
-    const {id, Marca, Detalhes, Foto} = req.body;
+    const {id, Nome, Descricao, Estado} = req.body;
      //ler o ficheiro local
      const datajson = fs.readFileSync("data/local/data.json", "utf-8");
      //parse do json
      const data = JSON.parse(datajson);
      //procurar o projeto para actualizar
-    const projetos = data.projetos.find(projetos => projetos.id == id);
+    const projetos = data.projetos.find(projeto => projeto.id == id);
     //atualizar as caraterísticas
     projetos.Nome = Nome;
     projetos.Descricao = Descricao;
@@ -58,8 +58,9 @@ exports.update = async (req, res) => {
     //actualizar no ficheiro json
     fs.writeFileSync('data/local/data.json', JSON.stringify(data));
     //devolver o projeto alterado
-    return res.send({id, Nome, Descricao, Estado});
+    return res.send({id, Marca, Detalhes, Foto});
 }
+
 
 //apaga o projeto com o id
 exports.delete = async (req, res) => {
@@ -70,7 +71,7 @@ exports.delete = async (req, res) => {
      //parse do json
      const data = JSON.parse(datajson);
      //procurar o indice do projeto a ser procurada
-    const projetoIndex  = data.projetos.findIndex(projetos => projetos.id == id);
+    const projetoIndex  = data.projetos.findIndex(projeto => projeto.id == id);
      // Verifique se o projeto foi encontrado
     if (projetoIndex !== -1) {
         // Exclua o estudante do array de estudantes

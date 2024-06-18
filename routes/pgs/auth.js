@@ -1,9 +1,8 @@
-const router = require('express').Router();
-const authRouter = require('./auth');
-const projetosRouter = require('./projetos');
+const authRouter = require('express').Router();
+const controller = require('../../controllers/pgs/auth');
 
-router.use('/auth', authRouter);
-router.use('/projetos', projetosRouter);
+authRouter.post('/signin', controller.signin);
+authRouter.post('/signup', controller.signup);
+authRouter.post('/letoken', controller.readToken);
 
-
-module.exports = router;
+module.exports = authRouter;

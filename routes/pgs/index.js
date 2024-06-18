@@ -1,7 +1,8 @@
 const router = require('express').Router();
+const projetosRouter = require('./projetos');
+const authRouter = require('./auth');
 
-const controller = require('../../controllers/pgs/projetos');
-
-router.get('/testeConn', controller.getAll); 
+router.use('/auth', authRouter);
+router.use('/projetos', projetosRouter);
 
 module.exports = router;

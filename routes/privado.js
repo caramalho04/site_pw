@@ -1,17 +1,28 @@
-const privadoRouter = require('express').Router();
-
+const path = require('path');
+const express = require('express');
+const privadoRouter = express.Router();
 
 // Define uma rota para a página HTML
-privadoRouter.get('/gerirProjetos', (req, res) => {
-    // Envie o arquivo HTML como resposta para a solicitação HTTP
-    res.sendFile('/Users/franc/Desktop/site_pw/site_pw/templates/frontEnd/meusprojetos.html');
-  });
+privadoRouter.get('/Equipas.html', (req, res) => {
+  // Use o método path.join para resolver o caminho absoluto do arquivo HTML
+  res.sendFile(path.join(__dirname, '../frontEnd' ,'Equipas.html'));
+});
 
-  // Define uma rota para a página HTML
-privadoRouter.get('/gerirTarefas', (req, res) => {
-  // Envie o arquivo HTML como resposta para a solicitação HTTP
-  res.sendFile('/Users/franc/Desktop/site_pw/site_pw/templates/frontEnd/tarefas.html');
+privadoRouter.get('/perfil.html', (req, res) => {
+  // Use o método path.join para resolver o caminho absoluto do arquivo HTML
+  res.sendFile(path.join(__dirname, '../frontEnd' ,'perfil.html'));
+});
+
+privadoRouter.get('/meusprojetos.html', (req, res) => {
+  // Use o método path.join para resolver o caminho absoluto do arquivo HTML
+  res.sendFile(path.join(__dirname, '../frontEnd' ,'meusprojetos.html'));
+});
+
+privadoRouter.get('/tarefas.html', (req, res) => {
+  // Use o método path.join para resolver o caminho absoluto do arquivo HTML
+  res.sendFile(path.join(__dirname, '../frontEnd' ,'tarefas.html'));
 });
 
 
 module.exports = privadoRouter;
+

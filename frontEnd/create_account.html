@@ -128,13 +128,14 @@
             var passwordcheck1 =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     
             if (!passwordcheck1.test(password1)){
-               alert("Password inválida");
+               alert("Password 1234");
             return false;
             }
             if(!password1.match(password2)){
                 alert("A password e a confirmação não são iguais");
             return false;
             }
+            window.location.href='login.html';
             novoUser();
             return true;
            }
@@ -143,7 +144,7 @@
         const novoUser = async () => {
         var dados = {
           email: document.getElementById("email").value,
-          name: document.getElementById("nome").value,
+          name: document.getElementById("Nome").value,
           password: document.getElementById("pswd").value,
           isAdmin: false,
         };
