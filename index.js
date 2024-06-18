@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
- res.send('Hello World! IPVC DEMO!  Realizado Por Francisco Caramalho Pedro Carvalho e João Vieira...');
+ res.send('Hello World! IPVC DEMO!  Atualizado por Francisco Caramalho, Joao Vieira, Pedro Carvalho...');
 });
 
 app.listen(port, () => {
