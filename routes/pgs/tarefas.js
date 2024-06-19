@@ -1,11 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const tarefasController = require('../../controllers/pgs/tarefas');
+const tarefasRouter = require('express').Router();
+const controller = require('../../controllers/pgs/tarefas');
 
-router.post('/criar', tarefasController.criarTarefa);
-router.get('/:id', tarefasController.obterTarefaPorId);
-router.put('/atualizar/:id', tarefasController.atualizarTarefa);
-router.delete('/apagar/:id', tarefasController.apagarTarefa);
-router.get('/', tarefasController.listarTarefas);
+//testa a ligação à BD
+tarefasRouter.get('/testeConn', controller.testConnection);
 
-module.exports = router;
+//CRUD para tarefas
+tarefasRouter.get('/', controller.getAll); //le todos');
+tarefasRouter.get('/:id', controller.getById); //le um tarefa indicado pelo id
+tarefasRouter.post('/create', controller.create); //criar um tarefa
+tarefasRouter.put('/update', controller.update); //atualizar um tarefa
+tarefasRouter.delete('/delete/:id', controller.delete); //apagar um tarefa
+
+
+
+module.exports = tarefasRouter;

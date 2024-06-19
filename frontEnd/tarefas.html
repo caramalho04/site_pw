@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
-    <link rel="stylesheet" href="/templates/frontEnd/styles/meustarefas.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas tarefas</title>
@@ -10,27 +9,28 @@
 </head>
 <style>
     .image-container {
-    text-align: center;
-  }
+        text-align: center;
+    }
   
-  .button-container {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+    .button-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
   
-  .same-size-button {
-    width: 200px;
-    height: 40px;
-    font-size: 16px;
-  }
+    .same-size-button {
+        width: 200px;
+        height: 40px;
+        font-size: 16px;
+    }
   
-  .table-container {
-    text-align: center;
-  }
+    .table-container {
+        text-align: center;
+    }
   
-  .table-container table {
-    margin: 0 auto;
-  }
+    .table-container table {
+        margin: 0 auto;
+    }
+  
     nav {
         position: fixed;
         top: 0;
@@ -38,17 +38,17 @@
         background-color: #333;
         overflow: hidden;
         width: 100%;
-      }
+    }
     
     nav ul {
         list-style-type: none;
         padding: 0;
         margin: 0;
-      }
+    }
     
     nav ul li {
         float: left;
-      }
+    }
     
     nav ul li a {
         display: block;
@@ -56,13 +56,13 @@
         text-align: center;
         padding: 14px 19px;
         text-decoration: none;
-      }
+    }
     
     nav ul li a:hover {
         background-color: #111;
-      }
+    }
     
-      .popup-overlay {
+    .popup-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -84,59 +84,52 @@
         transform: translate(-50%, -50%);
     }
     
-    .texto{
+    .texto {
         margin-left: 87%;
         font-size: 15px;
     }
     
-    .esp{
+    .esp {
         margin-top: 20%;
         margin-left: 40%;
     }
-  
-
 </style>
 
 <body>
 
     <h1>MEUS tarefaS</h1> 
 
-    
     <nav>
         <ul>
-          <li><a href="homepage.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="tarefa.html">Projects</a></li>
-          
-        
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tarefa.html">Projects</a></li>
         </ul>
     </nav>
-    
 
     <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
-            <img src="https://cdn.icon-icons.com/icons2/1097/PNG/512/1485477097-avatar_78580.png" alt="Imagem" class="img-fluid" width="20%">
-          </div>
+            <div class="col-md-12 text-center">
+                <img src="https://cdn.icon-icons.com/icons2/1097/PNG/512/1485477097-avatar_78580.png" alt="Imagem" class="img-fluid" width="20%">
+            </div>
         </div>
         <div class="row">
-          <div class="col-md-12 text-center">
-            <button class="same-size-button"><a href="perfil.html"> Perfil</a></button>
-            <button class="same-size-button"><a href="meusprojetos.html"> Projetos</a></button>
-            <button class="same-size-button"><a href="Equipas.html"> Equipas</a></button>
-          </div>
+            <div class="col-md-12 text-center">
+                <button class="same-size-button"><a href="perfil.html"> Perfil</a></button>
+                <button class="same-size-button"><a href="Equipas.html"> Equipas de Trabalho</a></button>
+                <button class="same-size-button"><a href="tarefas.html"> Tarefas e Cronogramas</a></button>
+            </div>
         </div>
-
         <div class="container mt-5">
             <h1>Lista de tarefas</h1>
             <table id="crudTable" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID_tarefa</th>
+                        <th>ID_Tarefa</th>
+                        <th>Nome</th>
                         <th>Descricao</th>
                         <th>DataInicio</th>
                         <th>DataFim</th>
-                        <th>NomeTarefa</th>
                         <th>Estado</th>
                         <th>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fa fa-solid fa-plus"></i> Novo</button>
@@ -144,100 +137,207 @@
                     </tr>
                 </thead>
                 <tbody id="cardtarefas">
-                  <tr>
-                    <th>ID_tarefa</th>
-                    <th>Descricao</th>
-                    <th>DataInicio</th>
-                    <th>DataFim</th>
-                    <th>NomeTarefa</th>
-                    <th>Estado</th>
-                    <th>
-                          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#upModal"><i class="fa fa-pencil"></i> Editar</button>
-                          <button type='button' class='btn btn-danger'><i class="fa fa-trash"></i> Apagar</button>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-      
-        
-    
-
-            <!-- Add Modal -->
-      <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addModalLabel">Adicionar tarefa</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3">
-                <label for="id" class="form-label">ID</label>
-                <input type="text" class="form-control" id="mId" name="id" />
-              </div>
-              <div class="mb-3">
-                <label for="Nome" class="form-label">NomeTarefa</label>
-                <input type="text" class="form-control" id="mNome" name="Nome" />
-              </div>
-              <div class="mb-3">
-                <label for="Descricao" class="form-label">Descrição</label>
-                <input type="text" class="form-control" id="mDescricao" name="Descricao" />
-              </div>
-              <div class="mb-3">
-                <label for="DataInicio" class="form-label">DataInicio</label>
-                <input type="text" class="form-control" id="mDataInicio" name="DataInicio" />
-              </div>
-              <div class="mb-3">
-                <label for="DataFim" class="form-label">DataFim</label>
-                <input type="text" class="form-control" id="mDataFim" name="DataFim" />
-              </div>
-              <div class="mb-3">
-                <label for="Estado" class="form-label">Estado</label>
-                <input type="text" class="form-control" id="mEstado" name="Estado" />
-              </div>
-              <button type="button" class="btn btn-primary" onclick="novotarefa()"><i class="fa-solid fa-floppy-disk"></i> Enviar</button>
-              <button type="reset" class="btn btn-success"><i class="fa-solid fa-shower"></i> Limpar</button>
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-door-closed"></i> Fechar</button>
-            </div>
-          </div>
+                    <!-- Conteúdo será carregado via JavaScript -->
+                </tbody>
+            </table>
         </div>
-      </div>
+    </div>
 
+    <!-- Modal para Adicionar tarefa -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Adicionar tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="mid" class="form-label">ID_Tarefa</label>
+                        <input type="text" class="form-control" id="mid" name="id" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mNome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="mNome" name="Nome" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mDescricao" class="form-label">Descricao</label>
+                        <input type="text" class="form-control" id="mDescricao" name="Descricao" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mDataInicio" class="form-label">DataInicio</label>
+                        <input type="text" class="form-control" id="mDataInicio" name="DataInicio" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mDataFim" class="form-label">DataFim</label>
+                        <input type="text" class="form-control" id="mDataFim" name="DataFim" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mEstado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="mEstado" name="Estado" />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="novoTarefa()">Enviar</button>
+                    <button type="reset" class="btn btn-success">Limpar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal para Editar tarefa -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="midEdit" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="midEdit" name="id" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mNomeEdit" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="mNomeEdit" name="nome" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mDescricaoEdit" class="form-label">Descricao</label>
+                        <input type="text" class="form-control" id="mDescricaoEdit" name="Descricao" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mDataInicioEdit" class="form-label">DataInicio</label>
+                        <input type="text" class="form-control" id="mDataInicioEdit" name="DataInicio" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mDataFimEdit" class="form-label">DataFim</label>
+                        <input type="text" class="form-control" id="mDataFimEdit" name="DataFim" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="mEstadoEdit" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="mEstadoEdit" name="Estado" />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="atualizaProjeto()">Salvar Alterações</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const novoProjetoBtn = document.querySelector('[data-bs-target="#addModal"]');
+            novoProjetoBtn.addEventListener('click', () => {
+                // Reset the modal fields
+                document.getElementById('mid').value = '';
+                document.getElementById('mNome').value = '';
+                document.getElementById('mDescricao').value = '';
+                document.getElementById('mDataInicio').value = '';
+                document.getElementById('mDataFim').value = '';
+                document.getElementById('mEstado').value = '';
+            });
 
-            <script>
-                const listartarefas = async () => {
-                    let strHtml = ``
-                    //alert("aaaa")
-                    const response = await fetch('http://localhost:4242/api/local/tarefas')
-                    const lv = await response.json()
-                    for (const artigo of lv) {
-                        strHtml += `
-                            <tr>
-                                <td>${artigo.id}</td>
-                                <td>${artigo.NomeTarefa}</td>
-                                <td>${artigo.Descricao}</td> 
-                                <td>${artigo.DataInicio}</td> 
-                                <td>${artigo.DataFim}</td> 
-                                <td>${artigo.Estado}</td> 
-                                <td>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#upModal" onclick="preparaEdittarefa(${artigo.id})"><i class="fa fa-pencil"></i> Editar</button>
-                                    <button type='button' class='btn btn-danger' onclick="apagatarefa(${artigo.id})"><i class="fa fa-trash"></i> Apagar</button>
-                                </td>
-                            </tr>
-                                `
-                    }
-                    document.getElementById("cardtarefas").innerHTML = strHtml;
-                }
-              listartarefas();
-            </script>
+            fetch('http://localhost:4242/api/pgs/tarefas')
+                .then(response => response.json())
+                .then(data => {
+                    const tabela = document.getElementById('cardtarefas');
+                    data.forEach(tarefa => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${tarefa.id}</td>
+                            <td>${tarefa.Nome}</td>
+                            <td>${tarefa.Descricao}</td>
+                            <td>${tarefa.DataInicio}</td>
+                            <td>${tarefa.DataFim}</td>
+                            <td>${tarefa.Estado}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" onclick="abrirEditarTarefa(${tarefa.id})">Editar</button>
+                                <button class="btn btn-danger btn-sm" onclick="apagarTarefa(${tarefa.id})">Apagar</button>
+                            </td>
+                        `;
+                        tabela.appendChild(tr);
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar tarefa:', error));
+        });
 
+        function novoTarefa() {
+            const id = document.getElementById('mid').value;
+            const Nome = document.getElementById('mNome').value;
+            const Descricao = document.getElementById('mDescricao').value;
+            const DataInicio = document.getElementById('mDataInicio').value;
+            const DataFim = document.getElementById('mDataFim').value;
+            const Estado = document.getElementById('mEstado').value;
 
+            const novotarefa = { id, Nome, Descricao, DataInicio, DataFim, Estado };
 
-         <!-- Add Bootstrap JS -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            fetch('http://localhost:4242/api/pgs/tarefas/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(novotarefa)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var addModal = new bootstrap.Modal(document.getElementById('addModal'));
+                addModal.hide();
+                location.reload();
+            })
+            .catch(error => console.error('Erro ao adicionar tarefa:', error));
+        }
 
+        async function abrirEditarTarefa(id) {
+            const response = await fetch(`http://localhost:4242/api/pgs/tarefas/${id}`);
+            const tarefa = await response.json();
+
+            document.getElementById('midEdit').value = tarefa.id;
+            document.getElementById('mNomeEdit').value = tarefa.Nome;
+            document.getElementById('mDescricaoEdit').value = tarefa.Descricao;
+            document.getElementById('mDataInicioEdit').value = tarefa.DataInicio;
+            document.getElementById('mDataFimEdit').value = tarefa.DataFim;
+            document.getElementById('mEstadoEdit').value = tarefa.Estado;
+        }
+
+        function atualizaProjeto() {
+            const dados = {
+                id: document.getElementById('midEdit').value,
+                Nome: document.getElementById('mNomeEdit').value,
+                Descricao: document.getElementById('mDescricaoEdit').value,
+                DataInicio: document.getElementById('mDataInicioEdit').value,
+                DataFim: document.getElementById('mDataFimEdit').value,
+                Estado: document.getElementById('mEstadoEdit').value,
+            };
+            fetch("http://localhost:4242/api/pgs/tarefas/update", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dados),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                editModal.hide();
+                location.reload();
+            })
+            .catch(error => console.error('Erro ao atualizar tarefa:', error));
+        }
+
+        function apagarProjeto(id) {
+            fetch(`http://localhost:4242/api/pgs/tarefas/delete/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                location.reload();
+            })
+            .catch(error => console.error('Erro ao apagar tarefa:', error));
+        }
+    </script>
+  
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

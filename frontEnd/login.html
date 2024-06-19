@@ -125,52 +125,47 @@
             <div class="card-body">
                 <form method="post" action="">
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email"
-                            required />
+                      <label for="email">Email:</label>
+                      <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required />
                     </div>
                     <div class="form-group">
-                        <label for="pswd">Password:</label>
-                        <input type="password" class="form-control" id="pswd"
-                            placeholder="Escreve a confirmação da password" name="pswd" required />
+                      <label for="pswd">Password:</label>
+                      <input type="password" class="form-control" id="pswd" placeholder="Escreve a confirmação da password" name="pswd" required />
                     </div>
                     <button type="button" class="btn btn-primary" onclick="validaLogin()">Login</button>
-                    <a class="btn btn-primary" href="create_account.html">Criar Conta</a>
-                </form>
+                    <a type="button" class="btn btn-primary" href="create_account.html">Criar Conta</a>
+                  </form>
             </div>
         </div>
     </div>
 
-    <script>
-        async function validaLogin() {
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("pswd").value;
-
-            try {
-                const response = await fetch("http://localhost:4242/api/pgs/auth/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email: email, password: password }),
-                });
-
-                if (!response.ok) {
-                    throw new Error("Erro ao fazer login - " + response.status + " " + response.statusText);
-                }
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert("Login bem-sucedido!");
-                    window.location.href = "perfil.html";
-                } else {
-                    alert("Credenciais inválidas. Por favor, tente novamente.");
-                }
-            } catch (error) {
-                alert("Houve um erro ao fazer login: " + error.message);
-            }
-        }
+    <script type="text/JavaScript">
+        // Função para validar o login
+        const validaLogin = async () => {
+          var dados = {
+            email: document.getElementById("email").value,
+            password: document.getElementById("pswd").value,
+          };
+          const response= await fetch("http://localhost:4242/api/pgs/auth/signin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+          })
+          console.log(response.ok);
+          dados= await  response.json()
+          if(!response.ok){
+            alert("Erro ao fazer login");
+          }
+          else{
+            alert("Login efetuado com sucesso");
+            console.log(dados);
+            // Guardar o token no local storage
+            localStorage.setItem("token", dados.token);
+            window.location.href = "http://localhost:4242/perfil.html";
+          }
+      };
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
